@@ -4,8 +4,10 @@ Example Application
 Introduction
 ------------
 This is a simple REST API - REST Client application using the ZF2 MVC layer and BackboneJS.
-It consists in an server side minimal REST API and a client side BackboneJS app both
-build from scratch.
+It consists in an server side minimal REST API and a client side BackboneJS app both build
+from scratch.
+
+It is also responsive and 'mobile friendly'.
 
 Purposes
 --------
@@ -27,7 +29,7 @@ required dependencies:
 
 ### DB set up
 
-Go to you MySQL and run the script file 'exampleApp_db.sql' included in the project root.
+Go to you MySQL and run the script file 'exampleApp_db.sql' shipped in the project root.
 It is a single table database script with sample data for illustrating the REST API
 database manipulation.
 
