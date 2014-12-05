@@ -1,0 +1,6 @@
+{
+
+  require: {
+	"zendframework/skeleton-application": "dev-master"
+  }
+}

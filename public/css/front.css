@@ -1,0 +1,71 @@
+body {
+
+    font-size: 15px;
+
+}
+header {
+
+    padding: 15px 0;
+    margin-bottom: 50px;
+    background-color: #428bca;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1) inset;
+    color: #ffffff;
+}
+
+.tab-content {
+    margin-top: 30px;
+}
+
+.table thead {
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.table {
+    font-size: 13px;
+}
+.table tr:hover {
+    font-weight: bold;
+    transition: all 0.2s;
+}
+.table td:first-child {
+    width: 300px;
+    padding-left: 30px;
+}
+table td.number{
+    text-align: right;
+    padding-right: 90px !important;
+}
+
+.commands .glyphicon {
+    cursor: pointer;
+    margin-right: 15px;
+    color: #337ab7;
+    padding: 4px;
+}
+.commands .glyphicon:hover {
+    transition: all 0.2s;
+    color: #000000;
+    transform: scale(1.3);
+}
+#error_msg {
+    display: none;
+}
+#activity_list {
+    min-height: 264px;
+}
+#cover {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: white url('../img/loader.gif') no-repeat center center;
+    opacity: 0.7;
+    z-index: 300;
+    transition: all 0.4s;
+}
+
+#activity_list.loading #cover {
+    display: block;
+
+}

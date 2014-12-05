@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aplicación de ejemplo</title>
+
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/css/front.css')
+        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+
+    <!-- Scripts -->
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+        ->prependFile($this->basePath() . '/js/jquery.min.js')
+
+    ; ?>
+
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="row"><div class="col-md-6 col-md-offset-3"><span>Sample financial app</span></div></div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+                <ul id="tabs" class="nav nav-tabs">
+                    <li role="presentation" class="active"><a data-toggle="tab" role="tab" aria-controls="activity_list" href="#activity_list">List</a></li>
+                    <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="activity_form" href="#activity_form">New</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active fade in" id="activity_list">
+
+                        <div id="cover"></div>
+
+                        <table id="activity_table" class="table table-striped">
+
+                            <thead>
+                                <td>Concept</td><td>Amount</td><td></td>
+                            </thead>
+
+                            <tbody>
+
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="activity_form">
+
+                            <form id="input_form" role="form">
+
+                                <div id="error_msg" class="alert alert-danger" role="alert">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span>
+                                    <span class="msg">Must enter a valid amount using dot(.) as decimal separator</span>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="description_input">Concept</label>
+                                            <input type="text" autocomplete="off" class="form-control" id="description_input" placeholder="Enter description" maxlength="20">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="amount_input">Description</label>
+                                            <input type="text" class="form-control" id="amount_input" placeholder="Enter amount" autocomplete="off" maxlength="8">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary btn-default">Submit</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+
+    <script src="/js/app.js"></script>
+
+
+    <!-- Template -->
+    <script type="text/template" id="list_view_template">
+
+        <td><%- description %></td>
+        <td class="number"><%- amount %></td>
+        <td class="commands">
+            <span data-element="<%- id %>" class="edit glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            <span data-element="<%- id %>" class="delete glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </td>
+
+    </script>
+
+
+</body>
+</html>
