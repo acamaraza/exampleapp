@@ -19,6 +19,11 @@ Class ActivityEntity
 
     }
 
+    /**
+     * Returns the complete list of records
+     *
+     * @return \Zend\Db\ResultSet\ResultSet
+     */
     public function fetchAll() {
 
         $sql = 'SELECT * FROM activities';
@@ -26,14 +31,25 @@ Class ActivityEntity
 
     }
 
+    /**
+     * Returns a simple record
+     *
+     * @param $id
+     * @return \Zend\Db\ResultSet\ResultSet
+     */
     public function fetch($id) {
 
         $sql = 'SELECT * FROM activities WHERE id = ?';
         return  $this->connection->query($sql, array($id));
 
-
     }
 
+    /**
+     * Inserts an activity record
+     *
+     * @param array $data
+     * @return int|\Zend\Db\Adapter\Driver\ResultInterface
+     */
     public function insert(array $data) {
 
         $data = array(
@@ -59,6 +75,12 @@ Class ActivityEntity
 
     }
 
+    /**
+     * For record deletion, only single record supported
+     *
+     * @param $id
+     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     */
     public function delete($id) {
 
         $sql = 'DELETE FROM activities WHERE id = ?';
@@ -66,6 +88,12 @@ Class ActivityEntity
 
     }
 
+    /**
+     * For record updating, only single record supported
+     *
+     * @param array $data
+     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     */
     public function update(array $data) {
 
         if (!isset($data['id'])) {

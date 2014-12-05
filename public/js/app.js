@@ -18,7 +18,7 @@
             this.amount.toFixed(2);
         },
         parse: function(response){
-            this.set({'id': response.id, 'amount': response.amount, 'description': response.description});
+            this.set({'id': response.id, 'amount': new Number(response.amount).toFixed(2), 'description': response.description});
         }
 
     });
@@ -179,6 +179,8 @@
             }
 
             $('#error_msg').hide();
+            $('#submit_button').text('Loading ...').addClass('disabled');
+
             var newActivity = new ActivityItem({
                 description: descriptionValue,
                 amount: amountValue
@@ -193,10 +195,12 @@
                     activityList.unshift(newActivity);
 
                     $('#input_form').find('input').val('');
+                    $('#submit_button').text('Submit').removeClass('disabled');
                     $('#tabs a:first').tab('show');
 
                 },
                 error: function(model, response) {
+                    $('#submit_button').text('Submit').removeClass('disabled');
                     alert ('A problem has occurred while adding new record');
                 }
             });
