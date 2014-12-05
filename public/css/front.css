@@ -32,10 +32,50 @@ header {
     width: 300px;
     padding-left: 30px;
 }
-table td.number{
+.table td.commands {
     text-align: right;
-    padding-right: 90px !important;
 }
+.table td.commands .cancel_edit, .table td.commands .save {
+    display: none;
+    color: darkred;
+}
+table td.number{
+    width: 126px;
+    text-align: right;
+    padding-right: 30px !important;
+}
+td input[type="text"]{
+    display: none;
+    margin-left: -11px;
+    padding-left: 10px;
+}
+td.number input[type="text"] {
+    width: 80px;
+    text-align: right;
+    padding-right: 10px;
+    margin-left: 0;
+    margin-right: -10px;
+}
+
+
+/* ----- Column edition mode ---- */
+tr.edition td input[type="text"] {
+    display: inline;
+}
+tr.edition span.elem-container {
+    display: none;
+}
+tr.edition span.edit, tr.edition span.delete {
+    display: none;
+}
+tr.edition td.commands {
+    text-align: left;
+}
+tr.edition td.commands .cancel_edit, tr.edition td.commands .save {
+    display: inline-block;
+    vert-align: middle;
+}
+/* ----- Close edition mode ----- */
 
 .commands .glyphicon {
     cursor: pointer;

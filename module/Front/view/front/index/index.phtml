@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aplicación de ejemplo</title>
+    <title>Example App</title>
 
     <!-- Le styles -->
     <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
@@ -52,7 +52,7 @@
                         <table id="activity_table" class="table table-striped">
 
                             <thead>
-                                <td>Concept</td><td>Amount</td><td></td>
+                                <td>Concept</td><td class="number">Amount</td><td></td>
                             </thead>
 
                             <tbody>
@@ -124,11 +124,16 @@
     <!-- Template -->
     <script type="text/template" id="list_view_template">
 
-        <td><%- description %></td>
-        <td class="number"><%- amount %></td>
+        <td><input type="text" class="activity" value="<%- description %>" /><span class="elem-container"><%- description %></span></td>
+        <td class="number"><input type="text" class="amount" value="<%- amount %>" /><span class="elem-container"><%- amount %></span></td>
+
         <td class="commands">
-            <span data-element="<%- id %>" class="edit glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            <span data-element="<%- id %>" class="delete glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+            <span title="edit element" data-element="<%- id %>" class="edit glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            <span title="delete" data-element="<%- id %>" class="delete glyphicon glyphicon-trash" aria-hidden="true"></span>
+
+            <span title="commit changes" data-element="<%- id %>" class="save glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <span title="cancel edition" data-element="<%- id %>" class="cancel_edit glyphicon glyphicon-remove" aria-hidden="true"></span>
         </td>
 
     </script>

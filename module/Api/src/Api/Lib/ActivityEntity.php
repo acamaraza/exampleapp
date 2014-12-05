@@ -1,6 +1,7 @@
 <?php
 namespace Api\Lib;
 
+use Api\Lib\Exception\InvalidArgumentException;
 use \Api\Resources\Db\DbConnectionDecorator;
 
 
@@ -65,7 +66,26 @@ Class ActivityEntity
 
     }
 
-    public function update($id) {}
+    public function update(array $data) {
+
+        if (!isset($data['id'])) {
+            throw new InvalidArgumentException('Id parameter is mandatory');
+        }
+
+        $data = array(
+            ':id' => $data['id'],
+            ':activity_type' => isset($data['activity_type']) ? $data['activity_type'] : $this::ACTIVITY_TYPE_EXPENSE,
+            ':amount' => array_key_exists('amount', $data) ? (int) $data['amount'] : 0,
+            ':description' => isset($data['description']) ? $data['description'] : null
+        );
+
+        $sql = 'UPDATE activities SET activity_type = :activity_type, amount = :amount, description = :description WHERE id = :id';
+
+        $result = $this->connection->execute($sql, $data);
+
+        return $result;
+
+    }
 
 
 }

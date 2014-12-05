@@ -27,7 +27,7 @@ class ActivityController extends AbstractRestfulController
         if ($result instanceof ResultSet) {
             $data = $this->formatCollection($result->toArray());
         } else {
-            $data = $this->formatError('Error al recuperar', 'Se ha producido un error al recuperar los datos');
+            $data = $this->formatError('Retrieving error', 'A problem has occurred while loading');
         }
 
         return new JsonModel($data);
@@ -47,7 +47,7 @@ class ActivityController extends AbstractRestfulController
         if ($result instanceof ResultSet) {
             $data = $this->formatCollection($result->toArray());
         } else {
-            $data = $this->formatError('Error al recuperar', 'Se ha producido un error al recuperar los datos');
+            $data = $this->formatError('Retrieving error', 'A problem has occurred while loading');
         }
 
         return new JsonModel($data);
@@ -68,7 +68,7 @@ class ActivityController extends AbstractRestfulController
         // Validation
         if (empty($data) || !array_key_exists('amount', $data)) {
 
-            $data = $this->formatError('Error al insertar', 'Parámetro suministrado no válido');
+            $data = $this->formatError('Insert error', 'Invalid parameter exception');
 
         } else {
 
@@ -83,11 +83,11 @@ class ActivityController extends AbstractRestfulController
                 if ($result instanceof ResultSet) {
                     $data = $this->formatCollection($result->toArray());
                 } else {
-                    $data = $this->formatError('Error al recuperar', 'Se ha producido un error al recuperar los datos');
+                    $data = $this->formatError('Retrieving error', 'A problem has occurred while loading');
                 }
 
             } else {
-                $data = $this->formatError('Error al recuperar', 'Se ha producido un error al recuperar los datos');
+                $data = $this->formatError('Retrieving error', 'A problem has occurred while loading');
             }
         }
 
@@ -114,7 +114,7 @@ class ActivityController extends AbstractRestfulController
 
         } else {
 
-            $data = $this->formatError('Error al eliminar', 'El recurso solicitado no existe');
+            $data = $this->formatError('Deleting error', 'The resource does not exist');
 
         }
 
@@ -132,7 +132,7 @@ class ActivityController extends AbstractRestfulController
 
         // Maps DELETE to delete
 
-        return new JsonModel($this->formatError('Recurso no soportado', 'El recurso que busca no se encuentra disponible'));
+        return new JsonModel($this->formatError('Retrieving error', 'A problem has occurred while loading'));
     }
 
     /**
@@ -145,7 +145,21 @@ class ActivityController extends AbstractRestfulController
     public function update($id, $data)
     {
 
-        return new JsonModel($this->formatError('Recurso no soportado', 'El recurso que busca no se encuentra disponible'));
+        $activityObj = $this->getServiceLocator()->get('ActivityEntity');
+
+        // Validation
+        if (preg_match("/[0-9]{1,9}/", $id)) {
+
+            $data['id'] = $id;
+            $activityObj->update($data);
+
+        } else {
+
+            $data = $this->formatError('Invalid argument exception', 'id parameter invalid');
+
+        }
+
+        return new JsonModel($data);
 
     }
 

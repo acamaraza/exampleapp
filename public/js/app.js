@@ -59,7 +59,16 @@
         },
         events: {
             "click .commands .edit"  : "editElement",
-            "click .commands .delete" : "deleteElement"
+            "click .commands .delete" : "deleteElement",
+            "click .commands .cancel_edit" : "cancelEdition",
+            "click .commands .save" : "commitChanges"
+        },
+
+        editElement: function() {
+            this.$el.addClass('edition');
+        },
+        cancelEdition: function() {
+            this.$el.removeClass('edition');
         },
 
         deleteElement: function() {
@@ -67,10 +76,45 @@
             this.model.destroy({
                 wait: true,
                 error: function(model, response) {
-                    alert('A problem has occurred while delenting');
+                    alert('A problem has occurred while deleting');
                 }
 
             });
+        },
+        commitChanges: function() {
+
+            var newAmount = this.$el.find('input.amount').val();
+            var newDescription = this.$el.find('input.activity').val();
+
+            var patt = new RegExp("^[0-9]+(\.[0-9]+)*$");
+
+            if (newDescription.length < 3) {
+                alert('Must enter a valid concept or activity description');
+                return false;
+            }
+            if (!patt.test(newAmount)) {
+                alert('Must enter a valid amount using dot(.) as decimal separator');
+                return false;
+            }
+
+            this.model.set({
+                description: newDescription,
+                amount: new Number(newAmount).toFixed(2)
+            });
+
+            var elem = this;
+            this.model.save({},
+                {
+                    wait: true,
+                    success: function(model, response) {
+                        elem.$el.removeClass('edition');
+                        // model.set({amount: response.amount, description: response.description});
+                    },
+                    error: function (model, response) {
+                        alert('A problem has occurred while updating');
+                    }
+                }
+            );
         }
 
     });
@@ -134,6 +178,7 @@
                 return false;
             }
 
+            $('#error_msg').hide();
             var newActivity = new ActivityItem({
                 description: descriptionValue,
                 amount: amountValue
