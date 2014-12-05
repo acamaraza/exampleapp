@@ -6,6 +6,7 @@ nbproject
 .idea
 .project
 .settings
+.puppet
 composer.lock
 vendor/
 public/vendor/
